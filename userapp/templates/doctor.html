@@ -1,0 +1,123 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<!-- admin section for add doctors -->
+{% if request.user.is_superuser %}
+
+    <div class="container d-flex justify-content-around">
+        <form action="" method="post" enctype="multipart/form-data" class="bg-white  w-75 rounded-3">
+            {% csrf_token %}
+            <p class="fw-bold fs-3 ">Add Doctor</p>
+            
+            <div class=" row">
+    
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                    <label for="id_category" >Depatment :</label>
+                    <select class="form-select" name="department" id="id_department">
+                        
+                       
+                        <option value selected>------</option>
+                        <option value="{{form.department}}">{{department.name}}</option>
+                        
+                        
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2"><label class="" for="">Doctor
+                    :</label><input type="text" name="doctor" class="form-control"></div>
+                
+    
+               
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark mt-4 mb-4 w-50">Add</button>
+                    <br>
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+
+
+        <div class="container d-flex justify-content-around">
+
+            <table class="table table-success table-striped mt-5">
+                <thead class="table-dark text-center ">
+                    <tr>
+                        <th>ID</th>
+                        <th>Doctor</th>
+                        <th>Department</th>
+                        <th>Delete</th>
+                        <th>Update/Edit</th>
+                        
+                    </tr>
+                </thead>
+                
+                <tbody class="text-center">
+        
+                    {% for i in data %}
+                  <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.doctor}}</td> <!-- data list cheyyan -->
+                        <td>{{i.department}}</td> <!-- data list cheyyan -->
+                        <td><a href="{% url 'del_doc' i.id %}"><i class="fa-solid fa-trash"></i></a></td>
+                        <td><a href="{% url 'update_doc' i.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        
+                        
+                        <!-- <td><a href="#"><i class="fa-solid fa-trash"></i></a></td> -->
+                  </tr>
+                  {%endfor%}
+                    
+                </tbody>
+                
+              </table>
+            
+    
+            
+        </div>
+
+
+
+        {% else %}
+        <!-- This code is for patients can dispaly doctors list -->
+
+        <div class="container d-flex justify-content-around">
+
+            <table class="table table-success table-striped mt-5">
+                <thead class="table-dark text-center ">
+                    <tr>
+                        
+                        <th>Doctor</th>
+                        <th>Department</th>
+                        
+                        
+                    </tr>
+                </thead>
+                
+                <tbody class="text-center">
+        
+                    {% for i in data %}
+                  <tr>
+                        
+                        <td>{{i.doctor}}</td> <!-- data list cheyyan -->
+                        <td>{{i.department}}</td> <!-- data list cheyyan -->
+                      
+                  </tr>
+                  {%endfor%}
+                    
+                </tbody>
+                
+              </table>
+            
+    
+            
+        </div>
+
+        {%endif%}
+
+
+       
+
+    
+
+    {%endblock%}

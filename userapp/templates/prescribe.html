@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="container">
+  <h1>Presribe Medicine/Patient Record</h1>
+  <form action="" method="post" class="mt-5">
+    {%csrf_token%}
+    <div class="form-floating">
+        <textarea name="pres" class="form-control"  ></textarea>
+        <label for="floatingTextarea">Prescribe</label>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-dark mt-4" type="submit">Save</button>
+          
+        </div>
+</form>
+</div>
+
+
+
+{% endblock%}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if request.user.is_superuser %}
+
+
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="mb-3">
+       <h2>Department</h2>
+       <div class="d-flex mt-4">
+        <input type="text" name="name" class="form-control" placeholder="Enter Department">
+        <input type="file" name="d_image" class="form-control">
+        
+        <button type="submit" class="btn btn-dark ms-2">Add</button>
+    </div>
+</form>
+</div>
+    
+
+
+
+    <table class="table table-success table-striped mt-5 ">
+        <thead class="table-dark text-center ">
+            <tr>
+                <th>ID</th>
+                <th>Department</th>
+                <th>Delete</th>
+                <th>Update/Edit</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+
+            {%for i in data%}
+          <tr>  
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td> <!-- data list cheyyan -->
+                <td><a href="{% url 'del_dept' i.id %}"><i class="fa-solid fa-trash"></i></a></td>
+                <td><a href="{% url 'update_d' i.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+          </tr>
+            {%endfor%}
+        </tbody>
+      </table>
+    
+</div>
+
+
+
+
+{% else %}
+
+
+<div class="container d-flex justify-content-around">
+<table class="table table-success table-striped mt-5">
+    <thead class="table-dark text-center ">
+        <tr>
+            
+            <th>Department</th>
+            
+        </tr>
+    </thead>
+    <tbody class="text-center">
+
+        {%for i in data%}
+      <tr>  
+        
+            <td>{{i.name}}</td> <!-- data list cheyyan -->
+     
+      </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+
+</div>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

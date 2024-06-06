@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<!-- carousin -->
+
+<marquee direction="left"><h6 class="text-danger">Announancements: Booking Facility also available , For Booking :Register as Patient and explore the Booking Facility...</h6></marquee>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        
+        <img src="{% static 'img/4.jpg' %}"  style="height: 300px; width: 1350px;" alt="img1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/5.png' %}"  style="height: 300px; width: 1350px;" alt="img2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/7.png' %}"  style="height: 300px; width: 1350px;" alt="img3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+<!--  -->
+
+
+
+<!-- {% if request.user.is_authenticated %}
+<h1>hello  {{request.user}}</h1>
+{% endif %} -->
+
+<div class="row">
+    {% for i in data %}
+    <div class="col-sm-4 d-flex justify-content-center">
+
+        
+        <div class="card my-5" style="width: 18rem;">
+            {% if i.d_image %}
+            <img src="{{i.d_image.url }}" class="card-img-top" alt="department image">
+            {% endif %}
+            <div class="card-body text-center">
+                <h5 class="card-title ">{{i.name}}</h5>
+                <p class="card-text">Our {{i.name}} Department is always with you for your good health</p>
+                <!-- <a href="#" class="btn btn-sm btn-dark">Go</a> -->
+            </div>
+        </div>
+        
+
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+{% endblock %}

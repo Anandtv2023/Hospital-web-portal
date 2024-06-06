@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="container d-flex justify-content-around">
+        <form action="" method="post" enctype="multipart/form-data" class="bg-white  w-75 rounded-3">
+            {% csrf_token %}
+            <p class="fw-bold fs-3 ">Update Doctor</p>
+            
+            <div class=" row mt-5">
+    
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                    <label for="id_category" >Depatment :</label>
+                    <select class="form-select" value="{{form.department.value}}" name="department" id="id_department">
+                        
+                       
+                        <option value selected>------</option>
+                        <option value="{{form.department}}">{{department.name}}</option>
+                        
+                        
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2"><label class="" for="">Doctor
+                    :</label><input type="text" value="{{form.doctor.value}}" name="doctor" class="form-control"></div>
+                
+    
+               
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary" type="button">Update</button>
+                      
+                      </div>
+
+
+            </div>
+        </form>
+
+    </div>
+
+
+        
+    {%endblock%}
+
+

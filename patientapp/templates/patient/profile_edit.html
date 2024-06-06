@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container d-flex justify-content-around">
+        <form action="" method="post" enctype="multipart/form-data" class="bg-white  w-75 rounded-3">
+            {% csrf_token %}
+            <p class="fw-bold fs-4 ">Edit Profile</p>
+            <hr class="mb-1 w-25 border-4">
+            <div class=" row">
+    
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4"><label class="" for="">Name
+                    :</label><input type="text" value="{{form.name.value}}" name="name" class="form-control"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4"><label class="" for="">Address
+                        :</label><input type="text" value="{{form.address.value}}" name="address" class="form-control"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4"><label class="" for="">Age
+                        :</label><input type="text" value="{{form.age.value}}" name="age" class="form-control"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4"><label class="" for="">Contact
+                        :</label><input type="text" value="{{form.contact.value}}" name="contact" class="form-control"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4">
+                            <label for="id_category" >Gender :</label>
+                            <select class="form-select" value="{{form.gender.value}}" name="gender" id="id_category">
+                                
+                               
+                                <option value selected>------</option>
+                                <option value="{{form.gender}}"></option>
+                                
+                                
+                            </select>
+                        </div>
+            
+    
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4"><label class="" for="">Email
+                        :</label><input type="email" value="{{form.email.value}}" name="email" class="form-control"></div>
+
+    
+               
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark mt-4 mb-4 w-50">Update Profile</button>
+                    <br>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+  
+
+
+
+{% endblock %}
+

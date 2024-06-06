@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+
+
+<h2 class="text-center fw-bold my-2 mt-5">Booking History</h2>
+
+<table class="table table-warning mt-5">
+    <tr>
+        <th class="text-center">Token No.</th>
+        <th>Patient Name</th>
+        <th>Department</th>
+        <th>Doctor Name</th>
+        <th>Visiting Date</th>
+        <th class="text-center" >Record</th>
+        <th class="text-center" >Visting Status</th>
+        
+    </tr>
+
+    {% for i in data %}
+    <tr>
+       
+        <td class="text-center"><h3>{{i.token}}</h3></td>
+        <td>{{i.patient.first_name}}</td>
+        <td>{{i.dept}}</td>
+        <td>{{i.doct}}</td>
+        <td>{{i.date}}</td>
+        
+        <td class="text-center"><a href="{% url 'viewrecord' i.id %}"><i class="fa-solid fa-eye"></i></a></td>
+        
+    
+      <!-- used for visiting status doctor can update the visiting status of patient -->
+
+        {% if i.visit == False %}
+        <td class="text-center"><i class="fa-solid fa-xmark"></a></td>
+        {% elif i.visit == True %}
+        <td class="text-center" ><i class="fa-solid fa-check"></i></td>
+        {% endif %}
+        
+        <!-- end -->
+        
+    </tr>
+    {%endfor%}
+
+</table>
+
+
+
+
+
+
+{%endblock%}

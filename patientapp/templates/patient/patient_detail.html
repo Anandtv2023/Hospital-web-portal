@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-center text-success font-monospace">PROFILE</h2>
+<div class="container my-5 d-flex justify-content-center ">
+    <div class="card" style="width: 18rem;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title fw-bolder text-center">{{request.user}}</h5>
+          <p class="card-text">Name : {{data.name}}</p>
+          <!-- or
+          <p class="card-text">{{data.qualification}}</p> -->
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Address : {{data.address}}</li>
+          <li class="list-group-item">Age : {{data.age}}</li>
+          <li class="list-group-item">Gender : {{data.gender}}</a></li>
+          <li class="list-group-item">Phone : {{data.contact}}</a></li>
+          
+          <li class="list-group-item">Email : {{data.email}}</a></li>
+        </ul>
+        <div class="card-body">
+          
+          
+          <a href="{% url 'update_profile' data.id %}" class="card-link btn btn-dark btn-sm d-flex justify-content-center">Edit Profile</a>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h2 class="text-center fw-bold my-2">Browse For Bookings....</h2>
+
+<div class="container">
+    <form method="post">
+        {%csrf_token%}
+        <div class="mb-3">
+          <label  class="form-label">Doctors ID</label>
+          <input type="text" class="form-control" name="did" >
+          
+        </div>
+        <div class="mb-3">
+            <label  class="form-label">Date</label>
+            <input type="date" class="form-control" name="bdate" >
+            
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark"  type="submit">Search</button>
+          </div>
+      </form>
+</div>
+
+
+
+
+<h2 class="text-center fw-bold my-2 mt-5">Patient List of Todays OP</h2>
+
+<table class="table table-warning">
+    <tr>
+        <th>Token No.</th>
+        <th>Patient Name</th>
+        <th>Department</th>
+        <th>Doctor Name</th>
+        <th>Visiting Date</th>
+        <th>Prescription</th>
+        <th>Record</th>
+        <th>Visting Status</th>
+        
+    </tr>
+
+    {% for i in data %}
+    <tr>
+       
+        <td>{{i.token}}</td>
+        <td>{{i.patient.first_name}}</td>
+        <td>{{i.dept}}</td>
+        <td>{{i.doct}}</td>
+        <td>{{i.date}}</td>
+        <td><a href="{% url 'pres' i.id %}"><i class="fa-solid fa-pencil"></i></a></td>
+        <td><a href="{% url 'viewrecord' i.id %}"><i class="fa-solid fa-eye"></i></a></td>
+        
+    
+      <!-- used for visiting status doctor can update the visiting status of patient -->
+
+        {% if i.visit == False %}
+        <td ><a  href="{% url 'edit' i.id %}"><i class="fa-solid fa-xmark"></i></a></td>
+        {% elif i.visit == True %}
+        <td ><a  href="{% url 'edit' i.id %}"><i class="fa-solid fa-check"></i></a></td>
+        {% endif %}
+        
+        <!-- end -->
+        
+    </tr>
+    {%endfor%}
+
+</table>
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.hospital.com</title>
+   
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+
+ 
+    <!-- CODE FOR NAVBAR  -->
+
+    <nav class="navbar navbar-expand-lg sticky-top" style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,180,210,1) 100%);">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item p-2 ">
+                    <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+                  </li>
+              <li class="nav-item p-2 ">
+                <a class="nav-link active text-white" aria-current="page" href="{% url 'dept' %}">Departments</a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link active text-white" href="{% url 'adddoctor' %}">Doctors</a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link active text-white" href="{% url 'register' %}">Register Patient</a>
+              </li>
+              <!-- <li class="nav-item p-2">
+                <a class="nav-link active text-white" href="#">Contact</a>
+              </li> -->
+              <li class="nav-item p-2">
+                <a class="nav-link active text-white" href="{% url 'about' %}">About Us</a>
+              </li>
+            </li>
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item p-2">
+              <a class="nav-link active text-white" href="{% url 'logout' %}">Logout</a>
+            </li>
+            
+
+            <li class="nav-item p-2 ">
+              <a class="nav-link text-danger fw-bolder" href="">Welcome {{request.user}}</a>
+              
+              
+            </li>
+
+            {% else %}
+              <li class="nav-item p-2">
+              <a class="nav-link active text-white" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+
+            {% if request.user.is_superuser %}
+
+
+            <li class="nav-item dropdown p-2">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Operations
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'dept' %}">Add Department</a></li>
+                <li><a class="dropdown-item" href="{% url 'adddoctor' %}">Add Doctor</a></li>
+
+                <!-- 18/03 -->
+                <li><a class="dropdown-item" href="{% url 'book_list' %}">Doctors Booking List</a></li>
+
+                
+              </ul>
+            </li>
+
+
+
+            
+            {% elif request.user.is_superuser == 0 and request.user.is_authenticated %}
+
+
+            <li class="nav-item dropdown p-2">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Operations
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if request.user.profile %}
+                <li><a class="dropdown-item" href="{% url 'update_profile' request.user.profile.id %}">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'p_view' request.user.profile.id %}">View Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'booking' %}">Booking</a></li>
+                <li><a class="dropdown-item" href="{% url 'history' %}">Booking History</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'p_profile' %}">Create Profile</a></li>
+                {% endif %}
+                
+              </ul>
+            </li>
+
+            
+
+
+    
+            {% endif %}
+              
+              
+            </ul>
+            <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+          </div>
+        </div>
+      </nav>
+    <!-- END OF NAVBAR CODE -->
+
+
+
+
+
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+   
+      <div class="card mt-5">
+      
+        <div class="card-body bg-secondary text-center">
+          <h5 class="card-title">Our Health Care Services ara also Available</h5>
+        </div>
+    
+      </div>
+
+    
+
+   
+
+</body>
+</html>
